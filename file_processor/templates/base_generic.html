@@ -1,0 +1,66 @@
+{% load django_browser_reload %} {% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Makro Automation Page</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <header class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="items-start justify-between py-4 border-b md:flex">
+        <div>
+          <h1 class="text-gray-800 text-3xl font-bold">Makro Automation 🚀</h1>
+        </div>
+        <div class="items-center gap-x-3 mt-6 md:mt-0 sm:flex">
+          <a
+            href="{% url 'login' %}"
+            {% if request.resolver_match.url_name == 'login' %}
+            class="block px-4 py-2 text-center text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            {% else %}
+            class="block px-4 py-2 text-center text-gray-700 duration-150 font-medium rounded-lg border hover:bg-gray-50 active:bg-gray-100 md:text-sm"
+            {% endif %}
+          >
+            Login
+          </a>
+          <a
+            href="{% url 'register' %}"
+            {% if request.resolver_match.url_name == 'register' %}
+            class="block px-4 py-2 text-center text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            {% else %}
+            class="block px-4 py-2 text-center text-gray-700 duration-150 font-medium rounded-lg border hover:bg-gray-50 active:bg-gray-100 md:text-sm"
+            {% endif %}
+          >
+            Register
+          </a>
+          <a
+            href="{% url 'upload' %}"
+            {% if request.resolver_match.url_name == 'upload' %}
+            class="block px-4 py-2 text-center text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            {% else %}
+            class="block px-4 py-2 text-center text-gray-700 duration-150 font-medium rounded-lg border hover:bg-gray-50 active:bg-gray-100 md:text-sm"
+            {% endif %}
+          >
+            Upload File
+          </a>
+          {% if user.is_authenticated %}
+          <a
+            href="{% url 'logout' %}"
+            {% if request.resolver_match.url_name == 'logout' %}
+            class="block px-4 py-2 text-center text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            {% else %}
+            class="block px-4 py-2 text-center text-gray-700 duration-150 font-medium rounded-lg border hover:bg-gray-50 active:bg-gray-100 md:text-sm"
+            {% endif %}
+          >
+            Logout
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+    <hr />
+    {% block content %} {% endblock %} {% django_browser_reload_script %}
+  </body>
+</html>
